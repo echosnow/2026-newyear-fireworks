@@ -2,315 +2,366 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026跨年祝福</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2025跨2026新年快乐</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        body {
             font-family: "Microsoft Yahei", sans-serif;
-            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #ffe066);
-            background-size: 400% 400%;
-            animation: bgAnimate 15s ease infinite;
+        }
+        
+        body {
+            background: #0a0a1a;
+            overflow: hidden;
             height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
             color: #fff;
-            text-align: center;
-        }
-
-        /* 背景动画 */
-        @keyframes bgAnimate {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* 倒计时容器 */
-        .countdown {
-            font-size: 3rem;
-            margin-bottom: 2rem;
-            text-shadow: 0 0 10px rgba(0,0,0,0.3);
-            opacity: 1;
-            transition: opacity 1s ease;
-        }
-
-        /* 祝福语容器 */
-        .blessing-container {
-            width: 90%;
-            max-width: 600px;
-            height: 300px;
             position: relative;
-            overflow: hidden;
-            background: rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.2);
         }
-
-        /* 单个祝福语 */
-        .blessing {
+        
+        /* 倒计时分两行 无框发光 */
+        .countdown {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            z-index: 10;
+            color: #ffd700;
+            text-align: center;
+            text-shadow: 0 0 3px #ffd700, 0 0 6px #ff3333;
+        }
+        
+        /* 新年文字分两行+呼吸效果+流动渐变 */
+        .new-year-text {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 1.8rem;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            opacity: 0;
-            transition: all 1s ease;
-            width: 100%;
+            z-index: 5;
+            text-align: center;
         }
-
-        /* 显示动画 */
-        .blessing.show {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1.1);
+        
+        .year {
+            font-size: 60px;
+            font-weight: 900;
+            /* 恢复流动渐变：红金循环，背景尺寸放大实现流动 */
+            background: linear-gradient(45deg, #ff3333, #ffd700, #ff3333);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-stroke: 0.5px #fff;
+            text-stroke: 0.5px #fff;
+            /* 呼吸动画 + 流动渐变动画 */
+            animation: 
+                breathe 2s infinite ease-in-out,
+                gradientFlow 3s ease-in-out infinite;
         }
-
-        /* 隐藏动画 */
-        .blessing.hide {
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0.8);
+        
+        .greeting {
+            font-size: 46px;
+            font-weight: 900;
+            margin-top: 8px;
+            /* 同步流动渐变 */
+            background: linear-gradient(45deg, #ff3333, #ffd700, #ff3333);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-stroke: 0.5px #fff;
+            text-stroke: 0.5px #fff;
+            /* 呼吸+流动动画 */
+            animation: 
+                breathe 2s infinite ease-in-out,
+                gradientFlow 3s ease-in-out infinite;
         }
-
-        /* 互动按钮 */
-        .interact-btn {
-            margin-top: 2rem;
-            padding: 12px 30px;
-            font-size: 1.2rem;
-            background: linear-gradient(90deg, #ff416c, #ff4b2b);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.4);
-            transition: all 0.3s ease;
-            outline: none;
+        
+        /* 呼吸动画（保留原有节奏） */
+        @keyframes breathe {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
         }
-
-        .interact-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 65, 108, 0.6);
+        
+        /* 恢复流动渐变动画（核心） */
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-
-        /* 烟花效果 */
-        .firework {
+        
+        /* 祝福语字号调大 无框发光 */
+        .blessings {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            text-align: center;
+            z-index: 5;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .blessing-text {
+            font-size: 26px;
+            line-height: 1.4;
+            color: #fff;
+            text-shadow: 0 0 6px #ff3333, 0 0 12px #ffd700;
+            animation: fadeInOut 0.8s ease-in-out;
+        }
+        
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 署名淡化不显眼 */
+        .signature {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 11px;
+            color: #ffd700;
+            opacity: 0.4;
+            z-index: 10;
+        }
+        
+        /* 雪花/烟花画布 - 确保层级正确 */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            z-index: 100;
-        }
-
-        /* ========== 新增：悬浮式作者信息样式 ========== */
-        .author-info {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0);
-            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
-            transition: color 0.5s ease;
-            padding: 5px 10px;
-            border-radius: 10px;
-            background: rgba(0,0,0,0.1);
-        }
-
-        .author-info:hover {
-            color: rgba(255, 255, 255, 0.9);
-            background: rgba(0,0,0,0.2);
-        }
-
-        /* 适配移动端 */
-        @media (max-width: 768px) {
-            .countdown {
-                font-size: 2rem;
-            }
-            .blessing {
-                font-size: 1.4rem;
-            }
-            .blessing-container {
-                height: 250px;
-            }
-            .author-info {
-                font-size: 0.7rem;
-            }
+            z-index: 1;
         }
     </style>
 </head>
 <body>
-    <!-- 倒计时显示 -->
-    <div class="countdown" id="countdown">2026 跨年倒计时...</div>
-    
-    <!-- 祝福语容器 -->
-    <div class="blessing-container">
-        <div class="blessing" id="blessing1">✨ 烟火向星辰，所念皆成真 ✨</div>
-        <div class="blessing" id="blessing2">🎆 即将告别2025，迎接2026 🎆</div>
-        <div class="blessing" id="blessing3">🎊 愿你新的一年，平安喜乐 🎊</div>
-        <div class="blessing" id="blessing4">💖 万事顺遂，前程似锦 💖</div>
-        <div class="blessing" id="blessing5">🥳 2026，我们一起越来越好 🥳</div>
-        <div class="blessing" id="blessing6">🎉 新年快乐 🎉</div>
+    <!-- 倒计时分两行 -->
+    <div class="countdown" id="countdown">
+        距离2026年还剩<br>00:00:00
     </div>
-
-    <!-- 互动按钮 -->
-    <button class="interact-btn" id="interactBtn">点击领取新年好运 🎁</button>
-
-    <!-- ========== 新增：悬浮式作者信息 ========== -->
-    <div class="author-info">🎁 send to everyone | from LuRui_airy</div>
-
-    <!-- 音频资源 -->
-    <audio id="bgMusic" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_2520291415.mp3?filename=happy-new-year-146503.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="clickSound">
-        <source src="https://cdn.pixabay.com/download/audio/2022/08/11/audio_886e008485.mp3?filename=click-124467.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="celebrateSound">
-        <source src="https://cdn.pixabay.com/download/audio/2022/07/08/audio_6f69988709.mp3?filename=celebration-81103.mp3" type="audio/mpeg">
-    </audio>
+    
+    <!-- 新年文字分两行+流动渐变+呼吸 -->
+    <div class="new-year-text">
+        <div class="year">2026</div>
+        <div class="greeting">新年快乐</div>
+    </div>
+    
+    <!-- 放大字号祝福语 -->
+    <div class="blessings" id="blessings">
+        <div class="blessing-text" id="blessingText">点击屏幕，开启新年祝福✨</div>
+    </div>
+    
+    <!-- 淡化署名 -->
+    <div class="signature">from：LuRui_airy</div>
+    
+    <!-- 雪花画布 -->
+    <canvas id="snowCanvas"></canvas>
+    <!-- 烟花画布 -->
+    <canvas id="fireworksCanvas"></canvas>
 
     <script>
-        // 获取DOM元素
-        const countdownEl = document.getElementById('countdown');
-        const interactBtn = document.getElementById('interactBtn');
-        const bgMusic = document.getElementById('bgMusic');
-        const clickSound = document.getElementById('clickSound');
-        const celebrateSound = document.getElementById('celebrateSound');
+        // ====================== 1. 倒计时功能 ======================
+        function updateCountdown() {
+            const targetDate = new Date('2026-01-01 00:00:00').getTime();
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+            
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML = '2026年<br>新年快乐！';
+                return;
+            }
+            
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            const formatTime = (num) => num.toString().padStart(2, '0');
+            document.getElementById('countdown').innerHTML = 
+                `距离2026年还剩<br>${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // ====================== 2. 雪花飘落动画 ======================
+        const snowCanvas = document.getElementById('snowCanvas');
+        const snowCtx = snowCanvas.getContext('2d');
+        let snowflakes = [];
         
-        // 所有祝福语元素
-        const blessings = [
-            document.getElementById('blessing1'),
-            document.getElementById('blessing2'),
-            document.getElementById('blessing3'),
-            document.getElementById('blessing4'),
-            document.getElementById('blessing5'),
-            document.getElementById('blessing6')
-        ];
-
-        // 播放背景音乐（需要用户交互触发）
-        document.addEventListener('click', function playMusic() {
-            bgMusic.volume = 0.3;
-            bgMusic.play().catch(err => console.log('音频播放需要用户交互'));
-            document.removeEventListener('click', playMusic);
-        }, { once: true });
-
-        // 播放音效函数
-        function playSound(audioEl) {
-            audioEl.currentTime = 0;
-            audioEl.volume = 0.5;
-            audioEl.play().catch(err => console.log('音效播放失败:', err));
+        function resizeCanvas() {
+            snowCanvas.width = window.innerWidth;
+            snowCanvas.height = window.innerHeight;
+            document.getElementById('fireworksCanvas').width = window.innerWidth;
+            document.getElementById('fireworksCanvas').height = window.innerHeight;
         }
-
-        // 分段显示祝福语
-        let currentBlessingIndex = 0;
-        function showNextBlessing() {
-            // 隐藏当前祝福语
-            if (currentBlessingIndex > 0) {
-                blessings[currentBlessingIndex - 1].classList.remove('show');
-                blessings[currentBlessingIndex - 1].classList.add('hide');
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        
+        class Snowflake {
+            constructor() {
+                this.x = Math.random() * snowCanvas.width;
+                this.y = Math.random() * snowCanvas.height - snowCanvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speed = Math.random() * 2 + 1;
+                this.angle = Math.random() * Math.PI * 2;
             }
-
-            // 显示下一个祝福语
-            if (currentBlessingIndex < blessings.length) {
-                blessings[currentBlessingIndex].classList.remove('hide');
-                blessings[currentBlessingIndex].classList.add('show');
-                currentBlessingIndex++;
+            
+            update() {
+                this.y += this.speed;
+                this.x += Math.sin(this.angle) * 1.5;
+                this.angle += 0.02;
                 
-                // 最后一个祝福语播放庆祝音效
-                if (currentBlessingIndex === blessings.length) {
-                    playSound(celebrateSound);
-                    countdownEl.textContent = "🎉 2026新年快乐！🎉";
+                if (this.y > snowCanvas.height) {
+                    this.x = Math.random() * snowCanvas.width;
+                    this.y = -10;
+                    this.size = Math.random() * 3 + 1;
+                    this.speed = Math.random() * 2 + 1;
                 }
-                
-                // 继续显示下一个
-                setTimeout(showNextBlessing, 3000);
+            }
+            
+            draw() {
+                snowCtx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                snowCtx.beginPath();
+                snowCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                snowCtx.fill();
             }
         }
+        
+        function initSnow() {
+            const snowCount = Math.floor(window.innerWidth / 5);
+            for (let i = 0; i < snowCount; i++) {
+                snowflakes.push(new Snowflake());
+            }
+        }
+        
+        function renderSnow() {
+            snowCtx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
+            snowflakes.forEach(snowflake => {
+                snowflake.update();
+                snowflake.draw();
+            });
+            requestAnimationFrame(renderSnow);
+        }
 
-        // 互动按钮点击事件
-        interactBtn.addEventListener('click', function() {
-            playSound(clickSound);
+        // ====================== 3. 烟花动画 ======================
+        const fireworksCanvas = document.getElementById('fireworksCanvas');
+        const fireworksCtx = fireworksCanvas.getContext('2d');
+        let particles = [];
+        
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.speed = Math.random() * 5 + 2;
+                this.angle = Math.random() * Math.PI * 2;
+                this.gravity = 0.05;
+                this.vx = Math.cos(this.angle) * this.speed;
+                this.vy = Math.sin(this.angle) * this.speed;
+                this.alpha = 1;
+                this.decay = Math.random() * 0.01 + 0.005;
+                this.color = color || ['#ff3333', '#ffd700', '#ffffff'][Math.floor(Math.random() * 3)];
+                this.size = Math.random() * 3 + 1;
+            }
             
-            // 隐藏按钮
-            interactBtn.style.opacity = 0;
-            setTimeout(() => interactBtn.style.display = 'none', 500);
+            update() {
+                this.vy += this.gravity;
+                this.x += this.vx;
+                this.y += this.vy;
+                this.alpha -= this.decay;
+            }
             
-            // 隐藏倒计时，开始显示祝福语
-            countdownEl.style.opacity = 0;
+            draw() {
+                fireworksCtx.save();
+                fireworksCtx.globalAlpha = this.alpha;
+                fireworksCtx.fillStyle = this.color;
+                fireworksCtx.beginPath();
+                fireworksCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                fireworksCtx.fill();
+                fireworksCtx.restore();
+            }
+        }
+        
+        function createFirework(x = Math.random() * fireworksCanvas.width, y = Math.random() * fireworksCanvas.height) {
+            const particleCount = 80;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle(x, y));
+            }
+        }
+        
+        function renderFireworks() {
+            fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+            particles = particles.filter(particle => particle.alpha > 0);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(renderFireworks);
+        }
+        
+        function initAutoFireworks() {
+            setInterval(() => {
+                createFirework();
+            }, 3000);
+        }
+
+        // ====================== 4. 祝福语切换 ======================
+        const blessingsList = [
+            "烟火向星辰，所念皆成真✨",
+            "年复一年，年赴一年，年富一年🧧",
+            "又一个四季在轮回🎊",
+            "我们有缘🥳",
+            "旧岁已展千重锦，新程再赴万里春🌟",
+            "愿新年，胜旧年，山河无恙，人间皆安🎈",
+            "2026，家人闲坐，灯火可亲，喜乐安宁🏮"
+        ];
+        
+        let currentBlessingIndex = 0;
+        const blessingText = document.getElementById('blessingText');
+        
+        document.addEventListener('click', (e) => {
+            currentBlessingIndex = (currentBlessingIndex + 1) % blessingsList.length;
+            blessingText.style.opacity = 0;
             setTimeout(() => {
-                countdownEl.textContent = "";
-                showNextBlessing();
-                createFireworks();
-            }, 1000);
+                blessingText.textContent = blessingsList[currentBlessingIndex];
+                blessingText.style.opacity = 1;
+            }, 400);
+            
+            createFirework(e.clientX, e.clientY);
+            const fireworkPoints = [
+                [fireworksCanvas.width/4, fireworksCanvas.height/3],
+                [fireworksCanvas.width/2, fireworksCanvas.height/4],
+                [fireworksCanvas.width*3/4, fireworksCanvas.height/3],
+                [fireworksCanvas.width/2, fireworksCanvas.height/2]
+            ];
+            fireworkPoints.forEach(point => createFirework(point[0], point[1]));
         });
 
-        // 创建烟花效果
-        function createFireworks() {
-            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffffff'];
-            
-            for (let i = 0; i < 50; i++) {
-                setTimeout(() => {
-                    const firework = document.createElement('div');
-                    firework.classList.add('firework');
-                    
-                    // 随机位置
-                    const x = Math.random() * window.innerWidth;
-                    const y = Math.random() * window.innerHeight;
-                    
-                    // 随机颜色
-                    const color = colors[Math.floor(Math.random() * colors.length)];
-                    firework.style.background = color;
-                    firework.style.left = `${x}px`;
-                    firework.style.top = `${y}px`;
-                    
-                    // 随机动画
-                    const size = Math.random() * 10 + 5;
-                    const duration = Math.random() * 2 + 1;
-                    
-                    firework.style.animation = `fireworkAnimate ${duration}s ease forwards`;
-                    
-                    document.body.appendChild(firework);
-                    
-                    // 添加烟花动画样式
-                    const style = document.createElement('style');
-                    style.textContent = `
-                        @keyframes fireworkAnimate {
-                            0% { transform: scale(0); opacity: 1; }
-                            50% { transform: scale(${size}); opacity: 0.8; }
-                            100% { transform: scale(0); opacity: 0; }
-                        }
-                    `;
-                    document.head.appendChild(style);
-                    
-                    // 移除烟花元素
-                    setTimeout(() => {
-                        firework.remove();
-                        style.remove();
-                    }, duration * 1000);
-                }, i * 100);
-            }
-        }
-
-        // 页面加载时的倒计时效果
-        let countdown = 3;
-        const countdownInterval = setInterval(() => {
-            countdownEl.textContent = `准备开启祝福 ${countdown}...`;
-            countdown--;
-            if (countdown < 0) {
-                clearInterval(countdownInterval);
-                countdownEl.textContent = "点击下方按钮，开启2026跨年祝福 🎇";
-            }
-        }, 1000);
+        // ====================== 初始化所有动画 ======================
+        window.onload = () => {
+            initSnow();
+            renderSnow();
+            renderFireworks();
+            initAutoFireworks();
+        };
     </script>
 </body>
 </html>
